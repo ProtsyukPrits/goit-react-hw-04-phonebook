@@ -31,11 +31,10 @@ const schema = yup.object().shape({
 
 export const ContactForm = ({ onSubmit }) => {
   const handleSubmit = (value, { resetForm }) => {
-    console.log(value);
+    console.log('value', value);
     resetForm();
     onSubmit(value);
   };
-
 
   return (
     <Formik
@@ -43,27 +42,25 @@ export const ContactForm = ({ onSubmit }) => {
       onSubmit={handleSubmit}
       validationSchema={schema}
     >
-      
-        <FormList autoComplete="off">
-          <Label htmlFor="name">
-            Name:
-            <Field type="text" name="name" as={Input} />
-            <ErrorMessage name="name" component="div" />
-          </Label>
+      <FormList autoComplete="off">
+        <Label htmlFor="name">
+          Name:
+          <Field type="text" name="name" as={Input} />
+          <ErrorMessage name="name" component="div" />
+        </Label>
 
-          <Label htmlFor="number">
-            Number:
-            <Field type="tel" name="number" as={Input} />
-            <ErrorMessage name="number" component="div" />
-          </Label>
+        <Label htmlFor="number">
+          Number:
+          <Field type="tel" name="number" as={Input} />
+          <ErrorMessage name="number" component="div" />
+        </Label>
 
-          <Button type="submit">Add contacts</Button>
-        </FormList>
+        <Button type="submit">Add contacts</Button>
+      </FormList>
     </Formik>
   );
 };
 
-
 ContactForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-}
+};
