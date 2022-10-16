@@ -22,9 +22,8 @@ export const App = () => {
 
   useEffect(() => {
     console.log('Create');
-
-    const contacts = localStorage.getItem(LS_KEY);
-    const parseContacts = JSON.parse(contacts);
+    const localStorContacts = localStorage.getItem(LS_KEY);
+    const parseContacts = JSON.parse(localStorContacts);
 
     if (parseContacts) {
       setContacts(parseContacts);
@@ -40,17 +39,12 @@ export const App = () => {
 
   // handl......
 
-  const addToContact = () => {
-    if (contacts.some(contact => contact.name === contacts.name)) {
+  const addToContact = ({ name, number }) => {
+    if (contacts.some(contact => contact.name === name)) {
       return Notiflix.Notify.info(`${contacts.name} is already in contacts!`);
     }
 
-    setContacts(() => ({
-      contacts: [
-        ...contacts,
-        { name: contacts.name, id: nanoid(), number: contacts.number },
-      ],
-    }));
+    setContacts(prevState => [...prevState, {id: nanoid(), name, number }]);
   };
 
   const deleteFromContact = id => {
